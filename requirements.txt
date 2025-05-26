@@ -47,6 +47,8 @@ mdurl==0.1.2
 msgpack==1.1.0
 narwhals==1.22.0
 numba==0.58.1
+--use-deprecated=legacy-resolver
+--no-build-isolation
 numpy==1.24.4
 packaging==24.2
 pandas==2.0.3
