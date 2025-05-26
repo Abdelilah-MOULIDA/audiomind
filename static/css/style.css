@@ -1,0 +1,240 @@
+/* Load Poppins font */
+@font-face {
+    font-family: 'Poppins';
+    src: url('../fonts/Poppins-Light.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Poppins';
+    src: url('../fonts/Poppins-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    color: black;
+}
+
+html, body {
+    height: 100%;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* 🧲 centrage vertical dans .main-content */
+    gap: 10px; /* un petit espace entre les textes et le bouton */
+}
+
+/* Container structure */
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 320px;
+}
+
+/* Logo wrapper */
+.logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px; /* espace entre l'étoile et le loader */
+}
+
+/* 
+.buymeacoffee-link {
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 28px;
+    height: 28px;
+}
+
+.circle-loader {
+    width: 12px; 
+    height: 12px;
+    position: relative;
+    display: inline-block;
+}
+
+.circle-loader::before,
+.circle-loader::after {
+    content: '';
+    position: absolute;
+    inset: 0; 
+    border-radius: 50%;
+    background: #fee456;
+    animation: animloader 0.5s linear infinite;
+}
+
+.circle-loader::after {
+    animation-delay: 0s;
+}
+
+@keyframes animloader {
+    0% {
+        transform: scale(0);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 0;
+    }
+} */
+
+/* Black circle */
+.circle {
+    width: 18px;
+    height: 18px;
+    border: 1px solid black;
+    border-radius: 50%;
+    display: inline-block;
+    position: relative;
+    box-sizing: border-box;
+}
+
+/* White star centered */
+.star {
+    font-size: 23px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    color: black;
+    line-height: 0;
+    position: relative;
+    top: 0px;
+    left: 0px;
+}
+
+/* Headline */
+.headline {
+    font-size: 23px;
+    font-weight: 700;
+    font-family: 'Poppins', sans-serif;
+    margin-bottom: -15px;
+}
+
+/* Subheadline */
+.subheadline {
+    font-size: 13px;
+    font-weight: 400;
+}
+
+/* Browse button */
+.browse-button {
+    padding: 5px 17px;
+    border: 1px solid black;
+    background: transparent;
+    font-size: 12px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 400;
+    color: black;
+}
+
+.browse-button:hover {
+    background: black;
+    color: white;
+}
+
+/* Loader */
+.loader {
+    width: 28px;
+    height: 28px;
+    border: 1px solid black;
+    border-radius: 50%;
+    display: inline-block;
+    position: relative;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+}
+
+.loader::after {
+    content: '';  
+    box-sizing: border-box;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: #FF3D00;
+    width: 13px;
+    height: 13px;
+    transform: translate(-50%, 50%);
+    border-radius: 50%;
+}
+
+/* Loader animation */
+@keyframes rotation {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Wrapper for button and loader */
+.action-wrapper {
+    position: relative;
+    height: 50px;
+    width: 130px;
+}
+
+/* Common styles for button and loader containers */
+#button-wrapper,
+#loader-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.3s ease;
+}
+
+/* Visibility states */
+.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.visible {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+/* Footer */
+.footer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer-logo img {
+    width: 22px;
+    height: auto;
+    opacity: 0.8;
+    transition: opacity 0.2s ease;
+}
+
+.footer-logo img:hover {
+    opacity: 1;
+}
+

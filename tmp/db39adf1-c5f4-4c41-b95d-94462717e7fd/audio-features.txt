@@ -1,0 +1,12 @@
+AUDIO ANALYSIS - saddam.mp3
+
+BPM: 95.70
+Key: F0
+Energy: 22.83%
+Danceability: 11.50
+Aggressiveness: 3.01
+Loudness: 0.228314
+Harmonic/Percussive Ratio: 1.4665
+Tonal Complexity: 6.99
+Beat Strength: 12.24
+Spectral Centroid: 2581.01
