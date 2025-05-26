@@ -1,93 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Audiomind</title>
-    <link rel="icon" href="{{ url_for('static', filename='imgs/favicon.ico') }}" type="image/x-icon">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AUDIOMIND</title>
+  <link rel="icon" href="{{ url_for('static', filename='imgs/audiomind-clean-favicon.ico') }}" type="image/x-icon" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
 </head>
 <body>
-    <div class="container">
-        <header class="header">
-            <div class="logo">
-                <div class="circle">
-                    <span class="star"></span>
-                </div>
-            </div>  
-        </header>
+  <div class="container">
+    <header class="header">
+      <div class="theme-toggle">
+        <button class="theme-btn" data-theme="light">LIGHT</button>
+        <button class="theme-btn" data-theme="dark">DARK</button>
+      </div>
+    </header>
 
-        <main class="main-content">
-            <div class="headline">Discover the Sound Behind the Music with Audiomind.</div>
-            <div class="subheadline">Drag and drop or upload an audio file here and get details about it (.mp3, .wav, etc).</div>
-            
-            <!-- Upload form -->
-            <form id="upload-form" action="/upload" method="post" enctype="multipart/form-data" target="hiddenFrame">
-                <input type="file" name="audio" id="audio-input" accept=".mp3,.wav" required style="display: none;">
-                
-                <div id="action-wrapper" class="action-wrapper">
-                    <div id="button-wrapper" class="visible">
-                        <button class="browse-button" type="button" id="browse-trigger">BROWSE</button>
-                    </div>
+    <main class="main-content">
+      <div class="headline">Discover the Sound Behind the Music with Audiomind.</div>
+      <div class="subheadline">Drag and drop or upload an audio file here and get details about it (.mp3, .wav, etc).</div>
 
-                    <div id="loader-wrapper" class="hidden">
-                        <span class="loader"></span>
-                    </div>
-                </div>  
-            </form>
+      <form id="upload-form" action="/upload" method="post" enctype="multipart/form-data" target="hiddenFrame">
+        <input type="file" name="audio" id="audio-input" accept=".mp3,.wav" required style="display: none;"/>
+        <div id="action-wrapper" class="action-wrapper">
+          <div id="button-wrapper" class="visible">
+            <button class="browse-button" type="button" id="browse-trigger">BROWSE</button>
+          </div>
+          <div id="loader-wrapper" class="hidden">
+            <span class="loader"></span>
+          </div>
+        </div>
+      </form>
+      <iframe name="hiddenFrame" style="display: none;"></iframe>
+    </main>
 
-            <iframe name="hiddenFrame" style="display: none;"></iframe>
-        </main>
+    <footer class="footer">
+      <a href="https://buymeacoffee.com/audiomind" target="_blank" class="footer-logo">
+        <img src="{{ url_for('static', filename='imgs/bmc-black.png') }}" alt="Buy me a coffee" class="bmc-logo"/>
+      </a>
+    </footer>
+  </div>
 
-        <script>
-            const input = document.getElementById("audio-input");
-            const button = document.getElementById("browse-trigger");
-            const form = document.getElementById("upload-form");
-            const buttonWrapper = document.getElementById("button-wrapper");
-            const loaderWrapper = document.getElementById("loader-wrapper");
+  <script>
+    const input = document.getElementById("audio-input");
+    const button = document.getElementById("browse-trigger");
+    const form = document.getElementById("upload-form");
+    const buttonWrapper = document.getElementById("button-wrapper");
+    const loaderWrapper = document.getElementById("loader-wrapper");
 
-            function showLoader() {
-                buttonWrapper.classList.remove("visible");
-                buttonWrapper.classList.add("hidden");
-                loaderWrapper.classList.remove("hidden");
-                loaderWrapper.classList.add("visible");
-            }
+    function showLoader() {
+      buttonWrapper.classList.remove("visible");
+      buttonWrapper.classList.add("hidden");
+      loaderWrapper.classList.remove("hidden");
+      loaderWrapper.classList.add("visible");
+    }
 
-            function showButton() {
-                loaderWrapper.classList.remove("visible");
-                loaderWrapper.classList.add("hidden");
-                buttonWrapper.classList.remove("hidden");
-                buttonWrapper.classList.add("visible");
-            }
+    function showButton() {
+      loaderWrapper.classList.remove("visible");
+      loaderWrapper.classList.add("hidden");
+      buttonWrapper.classList.remove("hidden");
+      buttonWrapper.classList.add("visible");
+    }
 
-            button.addEventListener("click", () => {
-                input.click();
-            });
+    button.addEventListener("click", () => input.click());
 
-            input.addEventListener("change", () => {
-                if (input.files.length > 0) {
-                    showLoader();
-                    setTimeout(() => {
-                        form.submit();
-                    }, 100);
-                }
-            });
+    input.addEventListener("change", () => {
+      if (input.files.length > 0) {
+        showLoader();
+        setTimeout(() => form.submit(), 100);
+      }
+    });
 
-            window.addEventListener("message", (event) => {
-                if (event.data === "upload-complete") {
-                    showButton();
-                }
-            });
-        </script>
+    window.addEventListener("message", (event) => {
+      if (event.data === "upload-complete") showButton();
+    });
 
-        <footer class="footer">
-            <div class="footer-content">
-                <!--span>© 2025 AUDIOMIND. All rights reserved.</span-->
-                <a href="https://buymeacoffee.com/audiomind" target="_blank" class="footer-logo">
-                    <img src="{{ url_for('static', filename='imgs/bmc-logo-no-background.png') }}" alt="Buy me a coffee" />
-                </a>
-            </div>
-        </footer>
-    </div>
+    const themeButtons = document.querySelectorAll(".theme-btn");
+    const body = document.body;
+    const savedTheme = localStorage.getItem("theme");
+
+    if (savedTheme === "dark") {
+      body.classList.add("dark-theme");
+      document.querySelector('[data-theme="dark"]').classList.add("active");
+    } else {
+      document.querySelector('[data-theme="light"]').classList.add("active");
+    }
+
+    themeButtons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        themeButtons.forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+
+        const theme = btn.getAttribute("data-theme");
+        if (theme === "dark") {
+          body.classList.add("dark-theme");
+          localStorage.setItem("theme", "dark");
+        } else {
+          body.classList.remove("dark-theme");
+          localStorage.removeItem("theme");
+        }
+      });
+    });
+  </script>
 </body>
 </html>
