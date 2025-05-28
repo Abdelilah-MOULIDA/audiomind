@@ -35,9 +35,13 @@ body.dark-theme {
   color: white;
 }
 
-body.dark-theme .footer-logo img {
+/* body.dark-theme .footer-logo img {
   filter: brightness(200%);
-}
+} */
+
+body.dark-theme .footer {
+    color: white;
+} 
 
 body.dark-theme .browse-button {
   border: 1px solid white;
@@ -217,7 +221,14 @@ body.dark-theme .bmc-logo {
 }
 
 /* Footer */
+/* Footer */
 .footer {
+    font-size: 10px;
+    color: black;
+    font-weight: 400;
+}
+
+/* .footer {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -232,4 +243,4 @@ body.dark-theme .bmc-logo {
 
 .footer-logo img:hover {
   opacity: 0.8;
-}
+} */
