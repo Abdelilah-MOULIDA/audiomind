@@ -1,4 +1,3 @@
-/* Poppins fonts */
 @font-face {
   font-family: 'Poppins';
   src: url('../fonts/Poppins-Light.ttf') format('truetype');
@@ -11,7 +10,6 @@
   font-weight: 700;
 }
 
-/* Reset + global */
 * {
   margin: 0;
   padding: 0;
@@ -21,135 +19,96 @@
 
 html, body {
   height: 100%;
-  width: 100%;
   background-color: white;
   color: black;
+}
+
+body {
+  background-image: 
+    linear-gradient(to right, rgba(0, 0, 0, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+
+.site-header {
+  padding-bottom: 30px;
+}
+
+.audiomind-logo {
   display: flex;
-  justify-content: center;
   align-items: center;
 }
 
-/* Dark mode */
-body.dark-theme {
+.audiomind-logo .rect {
+  width: 13px;
+  height: 40px;
+  border: 1px solid black;
   background-color: black;
-  color: white;
 }
 
-/* body.dark-theme .footer-logo img {
-  filter: brightness(200%);
-} */
-
-body.dark-theme .footer {
-    color: white;
-} 
-
-body.dark-theme .browse-button {
-  border: 1px solid white;
-  color: white;
+.audiomind-logo .circle {
+  width: 40px;
+  height: 40px;
+  border: 1px solid black;
+  border-radius: 50%;
+  background-color: black;
 }
 
-body.dark-theme .browse-button:hover {
-  background: white;
-  color: black;
-}
-
-body.dark-theme .theme-btn.active {
-  background-color: white;
-  color: black;
-}
-
-body.dark-theme .loader {
-  border-color: white;
-}
-
-.bmc-logo {
-  width: 22px;
-  height: auto;
-  transition: filter 0.3s ease;
-}
-
-body.dark-theme .bmc-logo {
-  content: url('../imgs/bmc-white.png');
-}
-
-/* Layout container */
-.container {
+.page-wrapper {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  align-items: center;
   height: 100vh;
-  padding: 60px 20px;
-  box-sizing: border-box;
-  text-align: center;
+  padding: 60px 330px;
 }
 
-/* Header */
-.header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-}
-
-/* Logo image */
-.logo-image {
-  width: 32px;
-  height: auto;
-}
-
-/* Theme switcher */
-.theme-toggle {
-  display: flex;
-  gap: 0;
-  padding: 3px;
-  border: 1px solid currentColor;
-  border-radius: 999px;
-  background: transparent;
-  font-size: 10px;
-}
-
-.theme-btn {
-  border: none;
-  background: transparent;
-  color: inherit;
-  font-family: 'Poppins', sans-serif;
-  font-size: 10px;
-  padding: 3px 10px;
-  border-radius: 999px;
-  cursor: pointer;
-  transition: background 0.2s ease, color 0.2s ease;
-}
-
-.theme-btn.active {
-  background-color: black;
-  color: white;
-}
-
-/* Main content */
 .main-content {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 15px;
+  justify-content: center;
+  height: 100%;
+  max-width: 1000px;
 }
 
-/* Texts */
 .headline {
-  font-size: 23px;
+  font-size: 57px;
   font-weight: 700;
-  margin-bottom: -20px;
+  line-height: 0.9;
+  margin-bottom: 7px;
+  text-align: left;
 }
 
 .subheadline {
-  font-size: 13px;
+  font-size: 17px;
+  color: black;
+  margin-bottom: 15px;
+  text-align: left;
 }
 
-/* Upload form / browse */
+.browse-button {
+  padding: 7px 9px;
+  border: 1px solid black;
+  background: transparent;
+  font-size: 13px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: black;
+  align-self: flex-start;
+}
+
+.browse-button:hover {
+  background: black;
+  color: white;
+}
+
+/* Wrapper logique bouton / loader */
 .action-wrapper {
   position: relative;
-  height: 50px;
-  width: 130px;
+  width: fit-content;
+  height: 40px;
+  margin-top: 10px;
 }
 
 #button-wrapper,
@@ -157,12 +116,17 @@ body.dark-theme .bmc-logo {
   position: absolute;
   top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
+  width: 100%;
   display: flex;
-  justify-content: center;
   align-items: center;
-  transition: opacity 0.3s ease;
+}
+
+#button-wrapper {
+  justify-content: flex-start;
+}
+
+#loader-wrapper {
+  justify-content: flex-start;
 }
 
 .visible {
@@ -176,71 +140,82 @@ body.dark-theme .bmc-logo {
   pointer-events: none;
 }
 
-.browse-button {
-  padding: 5px 17px;
-  border: 1px solid black;
-  background: transparent;
-  font-size: 12px;
-  border-radius: 20px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  color: black;
-}
-
-.browse-button:hover {
-  background: black;
-  color: white;
-}
-
-/* Loader */
 .loader {
-  width: 28px;
-  height: 28px;
-  border: 1px solid black;
-  border-radius: 50%;
+  width: 48px;
+  height: 48px;
   display: inline-block;
   position: relative;
-  animation: rotation 1s linear infinite;
 }
-
-.loader::after {
-  content: '';
+.loader::after,
+.loader::before {
+  content: '';  
+  box-sizing: border-box;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: red;
   position: absolute;
   left: 0;
   top: 0;
-  background: #FF3D00;
-  width: 13px;
-  height: 13px;
-  transform: translate(-50%, 50%);
-  border-radius: 50%;
+  animation: animloader 2s linear infinite;
+}
+.loader::after {
+  animation-delay: 1s;
 }
 
-@keyframes rotation {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+@keyframes animloader {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0;
+  }
 }
 
-/* Footer */
-/* Footer */
-.footer {
-    font-size: 10px;
-    color: black;
-    font-weight: 400;
+.header-inner {
+  display: center;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
 }
 
-/* .footer {
+.brand-tag {
+  font-weight: 700;
+  font-size: 20px;
+  background: white;
+  border: 1px dashed black;
+  padding: 4px 10px;
+  transform: rotate(-5deg);
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);
+}
+
+.logo-centered {
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 100%;
 }
 
-.footer-logo img {
-  width: 32px;
+
+/* Footer structuré */
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  padding-top: 20px;
+  gap: 10px;
+}
+
+.footer-left {
+  color: black;
+}
+
+.footer-right img {
+  width: 40px;
   height: auto;
-  opacity: 1;
   transition: opacity 0.2s ease;
 }
 
-.footer-logo img:hover {
-  opacity: 0.8;
-} */
