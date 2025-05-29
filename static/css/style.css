@@ -175,7 +175,7 @@ body {
 }
 
 .header-inner {
-  display: center;
+  display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
@@ -218,4 +218,76 @@ body {
   height: auto;
   transition: opacity 0.2s ease;
 }
+
+@media (max-width: 768px) {
+  .page-wrapper {
+    padding: 40px 20px;
+  }
+
+  .header-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .main-content {
+    padding-top: 20px;
+    height: auto;
+  }
+
+  .headline {
+    font-size: 34px;
+    line-height: 1.2;
+    text-align: left;
+  }
+
+  .subheadline {
+    font-size: 15px;
+    text-align: left;
+  }
+
+  .browse-button {
+    width: 100%;
+    text-align: center;
+  }
+
+  .action-wrapper {
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  #button-wrapper,
+  #loader-wrapper {
+    justify-content: center;
+  }
+
+  .footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding-top: 30px;
+  }
+
+  .footer-right img {
+    width: 30px;
+  }
+
+  .brand-tag {
+    font-size: 16px;
+    padding: 3px 8px;
+    transform: rotate(0deg);
+    align-self: flex-start;
+  }
+
+  .audiomind-logo .rect {
+    width: 10px;
+    height: 30px;
+  }
+
+  .audiomind-logo .circle {
+    width: 30px;
+    height: 30px;
+  }
+}
+
 
