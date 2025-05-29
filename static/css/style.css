@@ -30,6 +30,12 @@ body {
   background-size: 40px 40px;
 }
 
+.header-inner {
+  display: flex;
+  justify-content: space-between; 
+  align-items: center;
+  width: 100%;
+}
 
 .site-header {
   padding-bottom: 30px;
@@ -56,19 +62,24 @@ body {
 }
 
 .page-wrapper {
+  padding-left: clamp(76px, 66vw, 340px);
+  padding-right: clamp(76px, 66vw, 340px);
+  padding-top: 60px;
+  padding-bottom: 60px;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 100vh;
-  padding: 60px 330px;
 }
 
 .main-content {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  height: 100%;
-  max-width: 1000px;
+  /* max-width: 1000px; */
+  width: 100%;
+  margin: 0;
+  /* margin-left: 0; */
 }
 
 .headline {
@@ -103,7 +114,7 @@ body {
   color: white;
 }
 
-/* Wrapper logique bouton / loader */
+/* Loader / bouton wrapper */
 .action-wrapper {
   position: relative;
   width: fit-content;
@@ -146,6 +157,7 @@ body {
   display: inline-block;
   position: relative;
 }
+
 .loader::after,
 .loader::before {
   content: '';  
@@ -159,6 +171,7 @@ body {
   top: 0;
   animation: animloader 2s linear infinite;
 }
+
 .loader::after {
   animation-delay: 1s;
 }
@@ -174,13 +187,7 @@ body {
   }
 }
 
-.header-inner {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-}
-
+/* Logo texte incliné */
 .brand-tag {
   font-weight: 700;
   font-size: 20px;
@@ -188,9 +195,10 @@ body {
   border: 1px dashed black;
   padding: 4px 10px;
   transform: rotate(-5deg);
-  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);
+  display: inline-block;
 }
 
+/* Centrage logo uniquement */
 .logo-centered {
   display: flex;
   justify-content: center;
@@ -198,8 +206,7 @@ body {
   height: 100%;
 }
 
-
-/* Footer structuré */
+/* Footer */
 .footer {
   display: flex;
   justify-content: space-between;
@@ -219,15 +226,10 @@ body {
   transition: opacity 0.2s ease;
 }
 
-@media (max-width: 768px) {
+/* Responsive */
+@media (max-width: 368px) {
   .page-wrapper {
     padding: 40px 20px;
-  }
-
-  .header-inner {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
   }
 
   .main-content {
@@ -289,5 +291,3 @@ body {
     height: 30px;
   }
 }
-
-
