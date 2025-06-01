@@ -3,13 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Audiomind</title>
   <link rel="icon" href="{{ url_for('static', filename='imgs/favicon.ico') }}" type="image/x-icon" />
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
 </head>
 <body>
-  <div class="framed-wrapper">
-    <div class="page-wrapper">
+    <div class="framed-wrapper">
+        <div class="page-wrapper">
         <!--header class="site-header section">
           <div class="logo-centered">
             <div class="audiomind-logo">
@@ -18,46 +19,48 @@
             </div>
           </div>
         </header-->
-        <header class="site-header">
-          <div class="header-inner">
-            <div class="audiomind-logo">
-              <div class="rect"></div>
-              <div class="circle"></div>
-            </div>
-            <span class="brand-tag">Audiomind</span>
-          </div>
-        </header>
+            <header class="site-header">
+                <div class="header-inner">
+                  <div class="audiomind-logo">
+                    <div class="rect"></div>
+                    <div class="circle"></div>
+                  </div>
+                  <div class="brand-tag-wrapper">
+                    <span class="brand-tag">Audiomind</span>
+                  </div>
+                </div>
+            </header>
 
-      <main class="main-content section">
-        <h1 class="headline">Découvrez les détails audio de votre musique avec Audiomind.</h1>
-        <p class="subheadline">Déposez un fichier audio et recevez BPM, tonalité, mood, spectrogrammes, etc dans un fichier .zip.</p>
+            <main class="main-content section">
+                <h1 class="headline">Découvrez les détails audio de votre musique avec Audiomind.</h1>
+                <p class="subheadline">Déposez un fichier audio et recevez BPM, tonalité, mood, spectrogrammes, etc dans un fichier .zip.</p>
 
-        <form id="upload-form" action="/upload" method="post" enctype="multipart/form-data" target="hiddenFrame">
-          <input type="file" name="audio" id="audio-input" accept=".mp3,.wav" required style="display: none;" />
-          <div id="action-wrapper" class="action-wrapper">
-            <div id="button-wrapper" class="visible">
-              <button class="browse-button" type="button" id="browse-trigger">PARCOURIR</button>
-            </div>
-            <div id="loader-wrapper" class="hidden">
-              <span class="loader"></span>
-            </div>
-          </div>
-        </form>
-        <iframe name="hiddenFrame" style="display: none;"></iframe>
-      </main>
+                <form id="upload-form" action="/upload" method="post" enctype="multipart/form-data" target="hiddenFrame">
+                  <input type="file" name="audio" id="audio-input" accept=".mp3,.wav" required style="display: none;" />
+                  <div id="action-wrapper" class="action-wrapper">
+                    <div id="button-wrapper" class="visible">
+                      <button class="browse-button" type="button" id="browse-trigger">PARCOURIR</button>
+                    </div>
+                    <div id="loader-wrapper" class="hidden">
+                      <span class="loader"></span>
+                    </div>
+                  </div>
+                </form>
+                <iframe name="hiddenFrame" style="display: none;"></iframe>
+            </main>
 
-      <footer class="footer section">
-        <div class="footer-left">
-          © 2025 Audiomind. All rights reserved.
+            <footer class="footer section">
+                <div class="footer-left">
+                  © 2025 Audiomind. All rights reserved.
+                </div>
+                <div class="footer-right">
+                  <a href="https://www.buymeacoffee.com/tonlien" target="_blank">
+                    <img src="{{ url_for('static', filename='imgs/bmc-logo.png') }}" alt="Buy me a coffee" />
+                  </a>
+                </div>
+            </footer>
         </div>
-        <div class="footer-right">
-          <a href="https://www.buymeacoffee.com/tonlien" target="_blank">
-            <img src="{{ url_for('static', filename='imgs/bmc-logo.png') }}" alt="Buy me a coffee" />
-          </a>
-        </div>
-      </footer>
     </div>
-  </div>
 
   <script>
     const input = document.getElementById("audio-input");

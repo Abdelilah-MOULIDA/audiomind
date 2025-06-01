@@ -198,6 +198,12 @@ body {
   display: inline-block;
 }
 
+.brand-tag-wrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
 /* Centrage logo uniquement */
 .logo-centered {
   display: flex;
@@ -227,67 +233,49 @@ body {
 }
 
 /* Responsive */
-@media (max-width: 368px) {
-  .page-wrapper {
-    padding: 40px 20px;
-  }
-
-  .main-content {
-    padding-top: 20px;
-    height: auto;
-  }
-
-  .headline {
-    font-size: 34px;
-    line-height: 1.2;
-    text-align: left;
-  }
-
+@media (max-width: 768px) {
+  .headline,
   .subheadline {
-    font-size: 15px;
-    text-align: left;
-  }
-
-  .browse-button {
-    width: 100%;
     text-align: center;
   }
 
-  .action-wrapper {
-    width: 100%;
-    margin-top: 20px;
+  .main-content {
+    align-items: center;
   }
 
-  #button-wrapper,
-  #loader-wrapper {
-    justify-content: center;
-  }
-
-  .footer {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-    padding-top: 30px;
-  }
-
-  .footer-right img {
-    width: 30px;
+  .browse-button {
+    align-self: center;
   }
 
   .brand-tag {
-    font-size: 16px;
-    padding: 3px 8px;
-    transform: rotate(0deg);
-    align-self: flex-start;
+    margin: 0 auto;
   }
 
-  .audiomind-logo .rect {
-    width: 10px;
-    height: 30px;
+  .footer {
+    align-items: center;
+    text-align: center;
   }
 
-  .audiomind-logo .circle {
-    width: 30px;
-    height: 30px;
+  .footer-left, .footer-right {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .page-wrapper {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .header-inner {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .brand-tag {
+    transform: rotate(-3deg);
   }
 }
