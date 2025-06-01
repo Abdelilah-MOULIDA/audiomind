@@ -232,18 +232,8 @@ body {
   transition: opacity 0.2s ease;
 }
 
-@media (max-width: 768px) {
-  .page-wrapper,
-  .main-content,
-  .header-inner,
-  .footer {
-    max-width: 100vw;
-    overflow-x: hidden;
-  }
-}
-
 /* Responsive */
-@media (max-width: 768px) {
+@media (max-width: 668px) {
   .headline,
   .subheadline {
     text-align: left;
@@ -299,21 +289,10 @@ body {
   } */
 
   .browse-button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-
-  .footer {
+    display: flex;
+    justify-content: center;
     align-items: center;
     text-align: center;
-    font-size: 10px;
-  }
-
-  .footer-right img {
-    width: 27px;
-    height: auto;
   }
 
   .footer-left, .footer-right {
