@@ -33,25 +33,57 @@ def upload():
     audio_path = os.path.join(working_dir, original_filename)
     file.save(audio_path)
 
-    # Load audio
-    y, sr = librosa.load(audio_path, sr=None)
+    # Load audio (90 premières secondes uniquement)
+    y, sr = librosa.load(audio_path, sr=None, duration=90)
 
     # Extract features
     bpm, _ = librosa.beat.beat_track(y=y, sr=sr)
+
+    # Analyse de tonalité avancée (majeur/minor)
+    chroma_cqt = librosa.feature.chroma_cqt(y=y, sr=sr)
+    chroma_mean = chroma_cqt.mean(axis=1)
+    major_profile = np.array([6.35, 2.23, 3.48, 2.33, 4.38, 4.09,
+                              2.52, 5.19, 2.39, 3.66, 2.29, 2.88])
+    minor_profile = np.array([6.33, 2.68, 3.52, 5.38, 2.60, 3.53,
+                              2.54, 4.75, 3.98, 2.69, 3.34, 3.17])
+    notes = ['C', 'C#', 'D', 'D#', 'E', 'F',
+             'F#', 'G', 'G#', 'A', 'A#', 'B']
+    correlations = []
+    for i in range(12):
+        corr_major = np.corrcoef(np.roll(major_profile, i), chroma_mean)[0, 1]
+        corr_minor = np.corrcoef(np.roll(minor_profile, i), chroma_mean)[0, 1]
+        correlations.append((corr_major, f"{notes[i]} major"))
+        correlations.append((corr_minor, f"{notes[i]} minor"))
+    best_match = max(correlations, key=lambda x: x[0])
+    key_name = best_match[1]
+
+    # Suite des features
     chroma = librosa.feature.chroma_stft(y=y, sr=sr)
-    key_idx = chroma.mean(axis=1).argmax()
-    key_name = librosa.midi_to_note(key_idx + 12)
     energy = np.mean(librosa.feature.rms(y=y)) * 100
     danceability = np.std(librosa.onset.onset_strength(y=y, sr=sr)) * 10
     aggressiveness = np.mean(librosa.feature.spectral_bandwidth(y=y, sr=sr)) / 1000
     loudness = np.mean(librosa.feature.rms(y=y))
     harmonic, percussive = librosa.effects.hpss(y)
     harmonic_percussive_ratio = np.mean(harmonic) / (np.mean(percussive) + 1e-6)
-    tonal_complexity = np.var(librosa.feature.chroma_cqt(y=y, sr=sr)) * 100
+    tonal_complexity = np.var(chroma_cqt) * 100
     beat_strength = np.mean(librosa.onset.onset_strength(y=y, sr=sr)) * 10
     spectral_centroid = np.mean(librosa.feature.spectral_centroid(y=y, sr=sr))
 
-    # Export TXT
+    # Définitions simples pour l'annexe
+    explanations = {
+        "BPM": "Battements par minute : indique la vitesse du morceau.",
+        "Key": "Ton musical principal (note) du morceau.",
+        "Energy": "Niveau d'énergie global, plus c'est élevé, plus le morceau est dynamique.",
+        "Danceability": "Facilité avec laquelle on peut danser sur le morceau.",
+        "Aggressiveness": "Sensibilité aux sons agressifs ou percutants.",
+        "Loudness": "Volume moyen perçu du morceau.",
+        "Harmonic/Percussive Ratio": "Rapport entre parties harmoniques (mélodie) et percussives (rythme).",
+        "Tonal Complexity": "Complexité tonale, ou diversité des notes et accords.",
+        "Beat Strength": "Force et présence du rythme.",
+        "Spectral Centroid": "Indique si le son est plus aigu ou grave."
+    }
+
+    # Export TXT avec annexe explicative
     txt_path = os.path.join(working_dir, 'audio-features.txt')
     with open(txt_path, 'w') as f:
         f.write(f"AUDIO ANALYSIS - {original_filename}\n\n")
@@ -66,6 +98,12 @@ def upload():
         f.write(f"Tonal Complexity: {tonal_complexity:.2f}\n")
         f.write(f"Beat Strength: {beat_strength:.2f}\n")
         f.write(f"Spectral Centroid: {spectral_centroid:.2f}\n")
+
+        # Annexe explicative
+        f.write("\n\n---\n")
+        f.write("ANNEXE: Explications des audio-features\n\n")
+        for key, desc in explanations.items():
+            f.write(f"{key} : {desc}\n")
 
     # Graphs
     viz_path = os.path.join(working_dir, 'visualizations')
@@ -106,6 +144,8 @@ def upload():
     with zipfile.ZipFile(zip_path, 'w') as zipf:
         for root, _, files in os.walk(working_dir):
             for f in files:
+                if f.endswith(('.mp3', '.wav', '.flac', '.ogg', '.m4a')):
+                    continue  # Ignore le fichier audio original
                 abs_path = os.path.join(root, f)
                 rel_path = os.path.relpath(abs_path, working_dir)
                 zipf.write(abs_path, arcname=rel_path)
