@@ -236,20 +236,64 @@ body {
 @media (max-width: 768px) {
   .headline,
   .subheadline {
-    text-align: center;
+    text-align: left;
   }
 
-  .main-content {
+  .headline {
+    font-size: 51px;
+  }
+
+  .subheadline {
+    margin-bottom: 8px; /* avant : 15px */
+    font-size: 10;
+  }
+
+  .header-inner {
+    display: flex;
+    flex-direction: row; /* ligne ! */
+    justify-content: space-between; /* logo à gauche, tag à droite */
     align-items: center;
-  }
-
-  .browse-button {
-    align-self: center;
+    width: 100%;
   }
 
   .brand-tag {
-    margin: 0 auto;
+    transform: rotate(-3deg);
+    align-self: flex-start; /* ✅ pour qu’il reste à gauche */
+    font-size: 16px;
   }
+
+  .audiomind-logo .rect {
+    width: 10px;
+    height: 30px;
+  }
+
+  .audiomind-logo .circle {
+    width: 30px;
+    height: 30px;
+  }
+
+  .main-content {
+    align-items: left;
+  }
+  
+  .action-wrapper {
+    margin-top: 8px; /* avant : 10px ou 20px sur mobile */
+  }
+
+  /* .browse-button {
+    align-self: center;
+    padding: 4px 36px;
+    font-size: 11px; 
+    height: 45px;  
+    width: 100%;   
+  } */
+
+  .browse-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
 
   .footer {
     align-items: center;
@@ -263,19 +307,8 @@ body {
 
 @media (max-width: 768px) {
   .page-wrapper {
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-left: 30px;
+    padding-right: 30px;
   }
 }
 
-@media (max-width: 768px) {
-  .header-inner {
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .brand-tag {
-    transform: rotate(-3deg);
-  }
-}
