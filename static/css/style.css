@@ -235,6 +235,7 @@ body {
 @media (max-width: 768px) {
   .page-wrapper,
   .main-content,
+  .header-inner,
   .footer {
     max-width: 100vw;
     overflow-x: hidden;
