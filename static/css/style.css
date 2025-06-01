@@ -59,6 +59,20 @@ body {
   background-color: black;
 }
 
+.grid-logo {
+  display: grid;
+  grid-template-columns: repeat(2, 28px);
+  grid-template-rows: repeat(2, 28px);
+  gap: 1px; /* ✅ léger espacement comme dans l'image */
+}
+
+.grid-logo .dot {
+  width: 28px;
+  height: 28px;
+  background-color: #222;
+  border-radius: 50%;
+}
+
 .page-wrapper {
   padding-left: clamp(76px, 66vw, 340px);
   padding-right: clamp(76px, 66vw, 340px);
